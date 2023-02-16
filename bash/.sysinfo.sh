@@ -1,15 +1,22 @@
 #!/bin/bash
-#fully qualified domain name
-hostname --fqdn
 
 
-#hostname information
-hostnamectl
+echo "Report for myvm"
+echo "==============="
 
 
-#Any IP addresses the machine has that are not on the 127 network
-hostname -I
+#Hostname
+echo "FQDN: $(hostname --fqdn)"
 
 
-#The amount of space available in only the root filesystem
-df /dev/sda3
+#operating sytem name and version
+echo "Operating System: $(lsb_release -d)"
+
+
+#ip address
+echo "IP Address: $(ip route show default | awk '{print $3}')"
+
+
+#free disk space number
+echo "Root filesystem free space: $(df -h / | awk 'NR==2 {print $4}')"
+echo "==============="
